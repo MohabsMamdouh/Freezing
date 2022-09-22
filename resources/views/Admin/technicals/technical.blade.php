@@ -26,7 +26,7 @@
 <div class="content-box">
     <br>
     <section class="is-title-bar">
-        <div 
+        <div
         @if (strtolower(language()->getCode()) == 'en')
             class="flex flex-col md:flex-row items-center justify-between space-y-6 md:space-y-0"
         @elseif (strtolower(language()->getCode()) == 'ar')
@@ -88,17 +88,17 @@
                                                 <a href="#">{{ $member->email }}</a>
                                             </td>
                                             <td style="width: 25%;">
-                                                <a href="{{ route('showTechnicals', ['id'=> $member->id]) }}" class="table-link text-center" style="margin: 5%;">     
+                                                <a href="{{ route('showTechnicals', ['id'=> $member->id]) }}" class="table-link text-center" style="margin: 5%;">
                                                     <span class="fa-stack text-center" style="">
                                                         <i class="fa-solid fa-eye"></i>
                                                     </span>
                                                 </a>
-                                                <a href="{{ route('EditTechnicals', ['id'=> $member->id]) }}" class="table-link text-center" style="margin: 5%;">     
+                                                <a href="{{ route('EditTechnicals', ['id'=> $member->id]) }}" class="table-link text-center" style="margin: 5%;">
                                                     <span class="fa-stack text-center" style="">
                                                         <i class="fa-solid fa-pencil"></i>
                                                     </span>
                                                 </a>
-                                                <a data-bs-toggle="modal" style="cursor: pointer" data-bs-target="#DeleteModal{{ $member->id }}" class="table-link text-center" style="margin: 5%;">     
+                                                <a data-bs-toggle="modal" style="cursor: pointer" data-bs-target="#DeleteModal{{ $member->id }}" class="table-link text-center" style="margin: 5%;">
                                                     <span class="fa-stack text-center" style="">
                                                         <i class="fa-solid fa-trash"></i>
                                                     </span>

@@ -66,7 +66,7 @@
 
     {{-- Input: Remember --}}
     <div class="field spaced">
-        <div class="control" 
+        <div class="control"
         @if (strtolower(language()->getCode()) == 'ar')
             dir="rtl"
         @endif

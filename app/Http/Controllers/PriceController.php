@@ -14,7 +14,7 @@ class PriceController extends BaseController
      */
     public function index()
     {
-        // 
+        //
     }
 
     /**
@@ -47,7 +47,7 @@ class PriceController extends BaseController
     public function show($id)
     {
         $plan = pricing::where('id', $id)->get();
-        return view('price.show', compact('plan'));
+        return view('Admin.price.show', compact('plan'));
     }
 
     /**

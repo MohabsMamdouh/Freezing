@@ -26,7 +26,7 @@ class FeedbackController extends BaseController
     public function create()
     {
         $jobs = Job::where('status', 2)->get();
-        return view('feedback.create', compact('jobs'));
+        return view('Admin.feedback.create', compact('jobs'));
     }
 
     /**

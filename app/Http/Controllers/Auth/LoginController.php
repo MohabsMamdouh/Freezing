@@ -36,10 +36,12 @@ class LoginController extends Controller
     {
 
         if ($user->checkRole('Admin')) {
-            return redirect('/admin/dashboard');
+            return redirect(route('AdminDashboard'));
         }
 
-        return redirect('/admin');
+        if ($user->checkRole('Technical')) {
+            return redirect(route('TechnicalDashboard'));
+        }
     }
 
     /**

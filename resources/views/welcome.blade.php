@@ -12,7 +12,7 @@
         $descr = $s->meta_description;
         $keyword = $s->meta_keyword;
     }
-    $title = explode(' ', $titleEn)
+    //$title = explode('', $titleEn)
 @endphp
 
 @if (strtolower(language()->getCode()) == 'en')
@@ -66,7 +66,7 @@
             <div class="container">
                 <a href="{{ route('UserHome') }}" class="navbar-brand">
                     @if (strtolower(language()->getCode()) == 'en')
-                        {{ $title[0] }}<span class="text-primary">{{ $title[1] }}</span>
+                        {{ $titleEn[0] . $titleEn[1] }}<span class="text-primary">{{ substr($titleEn, 2, 100) }}</span>
                     @elseif (strtolower(language()->getCode()) == 'ar')
                         <span class="text-primary">{{ $titleAr }}</span>
                     @endif
@@ -96,12 +96,12 @@
                         {{-- Language Switcher --}}
                         <div class="navbar-item has-divider has-user-avatar">
                             @if (strtolower(language()->getCode()) == 'en')
-                                <a class="dropdown-item" href="{{ language()->back('ar') }}"> 
+                                <a class="dropdown-item" href="{{ language()->back('ar') }}">
                                     <img style="display: inline" src="{{ asset('storage/flags/'. language()->country('ar') .'.png') }}" alt="{{ 'العربية' }}" width="{{ config('language.flags.width') }}" /> &nbsp;
                                     {{ 'العربية' }}
                                 </a>
                             @elseif (strtolower(language()->getCode()) == 'ar')
-                                <a class="dropdown-item" href="{{ language()->back('en') }}"> 
+                                <a class="dropdown-item" href="{{ language()->back('en') }}">
                                     <img style="display: inline" src="{{ asset('storage/flags/'. language()->country('en') .'.png') }}" alt="{{ 'English' }}" width="{{ config('language.flags.width') }}" /> &nbsp;
                                     {{ 'English' }}
                                 </a>
@@ -143,7 +143,7 @@
                             </div>
                         </div>
                     </div>
-        
+
                     <div class="col-md-6 col-lg-4 py-3 wow fadeInUp">
                         <div class="d-flex flex-row">
                             <div class="img-fluid mr-3">
@@ -154,7 +154,7 @@
                             </div>
                         </div>
                     </div>
-        
+
                     <div class="col-md-6 col-lg-4 py-3 wow fadeInUp">
                         <div class="d-flex flex-row">
                             <div class="img-fluid mr-3">
@@ -168,7 +168,7 @@
                 </div>
             </div> <!-- .container -->
         </div> <!-- .page-section -->
-    
+
         <div class="page-section">
             <div class="container">
                 <div class="row">
@@ -185,7 +185,7 @@
                 </div>
             </div> <!-- .container -->
         </div> <!-- .page-section -->
-    
+
         <div class="page-section counter-section" id='about'>
             <div class="container">
                 <div class="row align-items-center text-center">
@@ -204,7 +204,7 @@
                 </div>
             </div> <!-- .container -->
         </div> <!-- .page-section -->
-    
+
         <div class="page-section">
             <div class="container">
                 <div class="row">
@@ -222,7 +222,7 @@
                 </div>
             </div> <!-- .container -->
         </div> <!-- .page-section -->
-    
+
         <div class="page-section" id="whyus">
             <div class="container">
                 <div class="text-center wow fadeInUp">
@@ -230,7 +230,7 @@
                     <h2 class="title-section"><span class="marked">{{ __('public.Your Comfort is Our Priority') }}</span></h2>
                     <div class="divider mx-auto"></div>
                 </div>
-    
+
                 <div class="row mt-5 text-center">
                     <div class="col-lg-4 py-3 wow fadeInUp">
                         <div class="display-3" style="color: #6C55F9"><i class="fa-solid fa-signal"></i></div>
@@ -250,25 +250,25 @@
                 </div>
             </div> <!-- .container -->
         </div> <!-- .page-section -->
-    
+
         <div class="page-section border-top">
             <div class="container">
                 <div class="text-center wow fadeInUp">
                     <h2 class="title-section"><span class="marked">{{ __('public.Pricing Plan') }}</span></h2>
                     <div class="divider mx-auto"></div>
                 </div>
-        
+
                 <div class="row justify-content-center">
 
                     @foreach ($price as $plan)
-                        <div class="col-12 col-lg-auto py-3 wow 
+                        <div class="col-12 col-lg-auto py-3 wow
                             @if ($plan->plan == 'Individual')
                                 fadeInLeft
                             @else
                                 fadeInUp
                             @endif
                         " style="min-width: 30%">
-                            <div class="card-pricing 
+                            <div class="card-pricing
                                 @if ($plan->plan == 'Central')
                                     active
                                 @endif
@@ -299,14 +299,14 @@
                             </div>
                         </div>
                     @endforeach
-        
+
                 </div>
             </div> <!-- .container -->
         </div> <!-- .page-section -->
-    
+
         <div class="page-section bg-light">
             <div class="container">
-                
+
                 <div class="owl-carousel wow fadeInUp" id="testimonials">
                 @foreach ($users as $user)
                     <div class="item">
@@ -326,8 +326,8 @@
                                             @elseif (strtolower(language()->getCode()) == 'ar')
                                                 {{ $user->arabic_name }}
                                             @endif
-                                        </strong> 
-                                        &mdash; 
+                                        </strong>
+                                        &mdash;
                                         <span class="text-grey">{{ __('dashboard.'.$user->roles[0]->name) }}</span>
                                     </div>
                                 </div>
@@ -335,11 +335,11 @@
                         </div>
                     </div>
                 @endforeach
-        
+
                 </div>
             </div> <!-- .container -->
         </div> <!-- .page-section -->
-    
+
         <div class="page-section" id="contact">
             <div class="container">
                 <div class="row align-items-center">
@@ -347,7 +347,7 @@
                         <h2 class="title-section" style="text-align: {{ $align }}"><span class="marked">{{ __('public.Get in Touch') }}</span></h2>
                         <div class="divider mx-auto"></div>
                         <p>{{ $descr }}</p>
-        
+
                         <ul class="contact-list">
                             <li>
                                 <div class="icon"><i class="fa-solid fa-location-dot"></i></div>
@@ -369,7 +369,7 @@
                         <div class="subhead" style="text-align: {{ $align }}">{{ __('public.Contact') }}</div>
                         <h2 class="title-section" style="text-align: {{ $align }}"><span class="marked">{{ __('public.Drop Us a Request') }}</span></h2>
                         <div class="divider mx-auto"></div>
-                        
+
                         <form action="{{ route('StoreJob') }}" method="POST" id="request">
                             @csrf
                             <div class="py-2">
@@ -396,7 +396,7 @@
                 </div>
             </div> <!-- .container -->
         </div> <!-- .page-section -->
-    
+
         <div class="page-section border-top">
             <div class="container">
                 <div class="text-center wow fadeInUp">
@@ -419,15 +419,15 @@
                                 <div class="body">
                                     <div class="rate">
                                         @if ($feed->rate == 0)
-                                            <img id="angry" src="{{ URL('storage/emojis/angry.png') }}" /> 
+                                            <img id="angry" src="{{ URL('storage/emojis/angry.png') }}" />
                                         @elseif ($feed->rate == 1)
-                                            <img id="sad" src="{{ URL('storage/emojis/sad.png') }}" /> 
+                                            <img id="sad" src="{{ URL('storage/emojis/sad.png') }}" />
                                         @elseif ($feed->rate == 2)
-                                            <img id="happy" src="{{ URL('storage/emojis/happy.png') }}" /> 
+                                            <img id="happy" src="{{ URL('storage/emojis/happy.png') }}" />
                                         @elseif ($feed->rate == 3)
-                                            <img id="smile" src="{{ URL('storage/emojis/smiling.png') }}" /> 
+                                            <img id="smile" src="{{ URL('storage/emojis/smiling.png') }}" />
                                         @elseif ($feed->rate == 4)
-                                            <img id="lol" src="{{ URL('storage/emojis/lol.png') }}" /> 
+                                            <img id="lol" src="{{ URL('storage/emojis/lol.png') }}" />
                                         @endif
                                     </div>
                                     <div class="post-title">{{ $feed->feedback }}</div>
@@ -436,10 +436,10 @@
                         </div>
                     @endforeach
                 </div>
-        
+
             </div> <!-- .container -->
         </div> <!-- .page-section -->
-    
+
         <div class="page-section client-section">
             <div class="container-fluid">
                 <div class="row row-cols-2 row-cols-md-3 row-cols-lg-5 justify-content-center">
@@ -470,7 +470,7 @@
                     <h3 style="text-align: {{ $align }}">
                     <a href="{{ route('UserHome') }}" class="navbar-brand">
                             @if (strtolower(language()->getCode()) == 'en')
-                                {{ $title[0] }}<span class="text-primary">{{ $title[1] }}</span>
+                                {{ $titleEn[0] . $titleEn[1] }}<span class="text-primary">{{ substr($titleEn, 2, 100) }}</span>
                             @elseif (strtolower(language()->getCode()) == 'ar')
                                 <span class="text-primary">{{ $titleAr }}</span>
                             @endif
@@ -499,7 +499,7 @@
                 @include('vendor.includes.footer')
             </div>
         </div> <!-- .container -->
-        
+
     </footer> <!-- .page-footer -->
 
 

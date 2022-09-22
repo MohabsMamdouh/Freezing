@@ -27,7 +27,7 @@
 <div class="container">
     {{-- Head --}}
     <section class="is-title-bar">
-        <div 
+        <div
         @if (strtolower(language()->getCode()) == 'en')
             class="flex flex-col md:flex-row items-center justify-between space-y-6 md:space-y-0"
         @elseif (strtolower(language()->getCode()) == 'ar')
@@ -60,10 +60,10 @@
                                 <h5 class="h5 g-color-gray-dark-v1 mb-0">John Doe</h5>
                                 <span class="g-color-gray-dark-v4 g-font-size-12">5 days ago</span>
                             </div>
-                        
+
                             <p>Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin. Cras purus odio, vestibulum in vulputate at, tempus viverra turpis. Fusce condimentum nunc ac nisi vulputate fringilla. Donec lacinia congue
                                 felis in faucibus ras purus odio, vestibulum in vulputate at, tempus viverra turpis.</p>
-                        
+
                             <ul class="list-inline d-sm-flex my-0">
                                 <li class="list-inline-item g-mr-20">
                                     <a class="u-link-v5 g-color-gray-dark-v4 g-color-primary--hover" href="#!">

@@ -23,7 +23,7 @@ class TechnicalController extends BaseController
     public function index()
     {
         $tech = User::all();
-        return view('technicals.technical', compact('tech'));
+        return view('Admin.technicals.technical', compact('tech'));
     }
 
     /**
@@ -33,7 +33,7 @@ class TechnicalController extends BaseController
      */
     public function create()
     {
-        return view('technicals.create');
+        return view('Admin.technicals.create');
     }
 
     /**
@@ -54,7 +54,7 @@ class TechnicalController extends BaseController
             'Password' => 'required|min:8',
         ]);
 
-        $photo =  $request['FullName'] . '-' . now() . $request->Photo->extension();
+        $photo =  $request['FullName'] . '-' . now() . '.' . $request->Photo->extension();
         $request->Photo->move(public_path('storage/users'), $photo);
 
         $user = new User();
@@ -102,7 +102,7 @@ class TechnicalController extends BaseController
     public function show($id)
     {
         $tech = User::with('getPhones', 'getAddress', 'roles', 'getJobs')->where('id', $id)->get();
-        return view('technicals.show', compact('tech'));
+        return view('Admin.technicals.show', compact('tech'));
     }
 
     /**
@@ -114,7 +114,7 @@ class TechnicalController extends BaseController
     public function edit($id)
     {
         $tech = User::with('getPhones', 'getAddress', 'roles', 'getJobs')->where('id', $id)->get();
-        return view('technicals.edit', compact('tech'));
+        return view('Admin.technicals.edit', compact('tech'));
     }
 
     /**
@@ -135,7 +135,7 @@ class TechnicalController extends BaseController
             'Email' => 'required|string|min:4|max:255',
             'Photo' => 'image|mimes:jpg,png,jpeg,gif,svg|max:2048',
         ]);
-        
+
         if ($request->hasFile('Photo') == false) {
             $photo = $request['Hidden_Photo'];
         } else {

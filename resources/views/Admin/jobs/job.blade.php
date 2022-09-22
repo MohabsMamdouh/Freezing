@@ -50,7 +50,7 @@
 <div class="content-box">
     <br>
     <section class="is-title-bar">
-        <div 
+        <div
         @if (strtolower(language()->getCode()) == 'en')
             class="flex flex-col md:flex-row items-center justify-between space-y-6 md:space-y-0"
         @elseif (strtolower(language()->getCode()) == 'ar')
@@ -108,7 +108,7 @@
                                         <p>{{ __('public.There is no data to preview') }}</p>
                                     </div>
                                 </div>
-                             @else 
+                             @else
                                 @foreach ($jobs as $job)
                                   <ul class="timeline">
                                     <li>
@@ -132,7 +132,7 @@
                                                     <i class="fa-solid fa-{{ strtolower(substr($job['company_name'], 0, 1)) }}"></i>
                                                 </span>
                                                 <a class="username" href="{{ route('ShowJob', ['id' => $job['id']]) }}">
-                                                    {{ $job['company_name'] }} 
+                                                    {{ $job['company_name'] }}
                                                     <small></small>
                                                 </a>
                                                 @if ($job['status'] == 1)
@@ -150,7 +150,7 @@
                                                 <a href="{{ route('EditJob', ['id' => $job['id']]) }}" class="pull-right text-success content-link">
                                                     <i class="fa-solid fa-pen-to-square"></i>
                                                 </a>
-                                                
+
                                             </div>
                                             <div class="timeline-content" style="text-align: {{ $align }}">
 
@@ -178,7 +178,7 @@
                                                             @endif
                                                         </div>
                                                     </div>
-                                                    
+
                                                     <div style="width: 70%; float:right;border: 1px solid #ddd;padding: 10px;">
                                                         <div style="padding: 5px;">
                                                             <p>
@@ -215,11 +215,11 @@
                                                             @elseif ($job['status'] == 0)
                                                                 <form action="{{ route('AssignTo') }}" method="post">
                                                                     @csrf
-                                                                    <input 
-                                                                        type="text" 
-                                                                        list="AssignTo" 
-                                                                        class="form-control" 
-                                                                        name="AssignTo" 
+                                                                    <input
+                                                                        type="text"
+                                                                        list="AssignTo"
+                                                                        class="form-control"
+                                                                        name="AssignTo"
                                                                         style="border: 1px solid #ddd; width: 80%;display: inline;text-align: {{ $align }}"
                                                                         value="
                                                                             @if ($job['status'] == 1 || $job['status'] == 2)
@@ -230,7 +230,7 @@
                                                                                 @endif
                                                                             @endif
                                                                         "
-                                                                    > 
+                                                                    >
                                                                     <input type="hidden" name="job_id" value="{{ $job['id'] }}">
                                                                     <datalist id="AssignTo">
                                                                         @foreach ($techs as $tech)
@@ -301,11 +301,11 @@
                                                             @elseif ($job['status'] == 0)
                                                                 <form action="{{ route('AssignTo') }}" method="post">
                                                                     @csrf
-                                                                    <input 
-                                                                        type="text" 
-                                                                        list="AssignTo" 
-                                                                        class="form-control" 
-                                                                        name="AssignTo" 
+                                                                    <input
+                                                                        type="text"
+                                                                        list="AssignTo"
+                                                                        class="form-control"
+                                                                        name="AssignTo"
                                                                         style="border: 1px solid #ddd; width: 80%;display: inline;text-align: {{ $align }}"
                                                                         value="
                                                                             @if ($job['status'] == 1 || $job['status'] == 2)
@@ -316,7 +316,7 @@
                                                                                 @endif
                                                                             @endif
                                                                         "
-                                                                    > 
+                                                                    >
                                                                     <input type="hidden" name="job_id" value="{{ $job['id'] }}">
                                                                     <datalist id="AssignTo">
                                                                         @foreach ($techs as $tech)
@@ -350,7 +350,7 @@
                                                             @endif
                                                         </div>
                                                     </div>
-                                                    
+
                                                     <div style="width: 30%; float:right;padding: 10px;">
                                                         <div style="padding: 5px;">{{ __('dashboard.Description') }}</div>
                                                         <div style="padding: 5px;">{{ __('public.Phones') }}</div>
@@ -428,14 +428,14 @@
                                                                         </span><br>
                                                                         <span>{{ $feed['feedback'] }}</span>
                                                                     </div>
-                                                                    
+
                                                                     <div style="width: 20%; float:right;border: 1px solid #ddd;padding: 10px;">
                                                                         <span>{{ __('public.Rate') }}</span>
                                                                         <br>
                                                                         <span>{{ __('public.Feedbacks') }}</span>
                                                                     </div>
                                                                 @endif
-                                                            @endif 
+                                                            @endif
                                                         </div>
                                                     @endforeach
                                                 </div>

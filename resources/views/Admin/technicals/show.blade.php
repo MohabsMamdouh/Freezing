@@ -21,7 +21,7 @@
 @foreach ($tech as $member)
     <br>
     <section class="is-title-bar">
-        <div 
+        <div
         @if (strtolower(language()->getCode()) == 'en')
             class="flex flex-col md:flex-row items-center justify-between space-y-6 md:space-y-0"
         @elseif (strtolower(language()->getCode()) == 'ar')
@@ -49,7 +49,7 @@
                                         @foreach ($member->roles as $role)
                                             <span title="{{ $role->description }}">
                                                 | {{ $role->name }} |
-                                            </span> 
+                                            </span>
                                         @endforeach
                                     </p>
                                     <p class="text-secondary mb-1">{{ __('public.Jobs') }} => {{ count($member->getJobs) }}</p>
@@ -123,7 +123,7 @@
                             </div>
                         </div>
                     </div>
-        
+
                     <div class="row gutters-sm">
                         <div class="col-sm-6 mb-3">
                             <div class="card h-100">

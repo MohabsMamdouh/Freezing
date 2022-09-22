@@ -24,7 +24,7 @@
 
     <br>
     <section class="is-title-bar">
-        <div 
+        <div
         @if (strtolower(language()->getCode()) == 'en')
             class="flex flex-col md:flex-row items-center justify-between space-y-6 md:space-y-0"
         @elseif (strtolower(language()->getCode()) == 'ar')
@@ -38,7 +38,7 @@
                     <h4 style="width: 100%;text-align: {{ $align }};display: block;">
                         {{ __('public.Edit Data') }}
                     </h4>
-                </div>    
+                </div>
             </li>
         </ul>
         </div>
@@ -80,7 +80,7 @@
                                 <input type="text" style="text-align: {{ $align }};" class="form-control" name="addPhone" placeholder="{{ __('auth.Phone') }}" value="">
                             </div>
                         @endisset
-                        
+
                         <div class="col-md-12">
                             <label class="labels" style="text-align: {{ $align }};display: block;">{{ __('auth.Address') }}</label>
                             <input type="text" style="text-align: {{ $align }};" class="form-control" name="Address" placeholder="{{ __('auth.Address') }}" value="{{ $job[0]->getAddress->address }}">
@@ -93,11 +93,11 @@
                         <div class="col-md-12">
                             <div class="form-group">
                                 <label for="AssignTo" class="labels" style="text-align: {{ $align }};display: block;">{{ __('public.AssignTo') }}</label>
-                                <input 
-                                    type="text" 
-                                    list="AssignTo" 
-                                    class="form-control" 
-                                    name="AssignTo" 
+                                <input
+                                    type="text"
+                                    list="AssignTo"
+                                    class="form-control"
+                                    name="AssignTo"
                                     style="border: 1px solid #ddd"
                                     value="
                                     @if ($job[0]->status == 1 || $job[0]->status == 2)
@@ -108,7 +108,7 @@
                                         @endif
                                     @endif
                                     "
-                                > 
+                                >
                                 <datalist id="AssignTo">
                                     @foreach ($techs as $tech)
                                         @if (strtolower(language()->getCode()) == 'en')
@@ -134,12 +134,12 @@
                         <label class="labels text-danger" style="text-align: {{ $align }};display: block;">{{ __('dashboard.Status') }}</label>
                         <!-- Default switch -->
                         <div class="form-check form-switch">
-                            <input 
-                                class="form-check-input text-danger" 
-                                type="checkbox" 
-                                name="status" 
-                                role="switch" 
-                                id="technicalChecked" 
+                            <input
+                                class="form-check-input text-danger"
+                                type="checkbox"
+                                name="status"
+                                role="switch"
+                                id="technicalChecked"
                                 @if ($job[0]->status == 3)
                                     checked
                                 @endif

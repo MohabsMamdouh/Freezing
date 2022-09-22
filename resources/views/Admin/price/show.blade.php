@@ -20,7 +20,7 @@
 
     <br>
     <section class="is-title-bar">
-        <div 
+        <div
         @if (strtolower(language()->getCode()) == 'en')
             class="flex flex-col md:flex-row items-center justify-between space-y-6 md:space-y-0"
         @elseif (strtolower(language()->getCode()) == 'ar')
@@ -34,7 +34,7 @@
                     <h4 style="width: 100%;text-align: {{ $align }};display: block;">
                         {{ __('public.'.$plan[0]->plan) }}
                     </h4>
-                </div>    
+                </div>
             </li>
         </ul>
         </div>

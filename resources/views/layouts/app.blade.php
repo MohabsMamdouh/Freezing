@@ -49,15 +49,15 @@
   <div id="app">
 
     <nav id="navbar-main" class="navbar is-fixed-top">
-      @include('vendor.includes.navbar')
+        @include('vendor.includes.navbar')
     </nav>
 
     <aside class="aside is-placed-left is-expanded">
-      @include('vendor.includes.aside')
+        @include('vendor.includes.aside')
     </aside>
 
     <section class="content">
-      @yield('content')
+        @yield('content')
     </section>
 
   </div>

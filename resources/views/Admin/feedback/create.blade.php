@@ -29,7 +29,7 @@
 <div class="container">
     {{-- Head --}}
     <section class="is-title-bar">
-        <div 
+        <div
         @if (strtolower(language()->getCode()) == 'en')
             class="flex flex-col md:flex-row items-center justify-between space-y-6 md:space-y-0"
         @elseif (strtolower(language()->getCode()) == 'ar')
@@ -48,44 +48,44 @@
             @csrf
             <div class="container d-flex justify-content-center">
                 <div class="card mt-5 pb-5" style="box-shadow: 2px 2px 5px #0763c5;border-radius: 20px;">
-                    <div class="d-flex flex-row justify-content-center p-3 adiv text-white" style="border-radius: 20px;"> 
-                        <span class="pb-3" style="font-size: 18px;margin-top: -5px;"><b>{{ __('public.Feedbacks') }}</b></span> 
+                    <div class="d-flex flex-row justify-content-center p-3 adiv text-white" style="border-radius: 20px;">
+                        <span class="pb-3" style="font-size: 18px;margin-top: -5px;"><b>{{ __('public.Feedbacks') }}</b></span>
                     </div>
                     <div class="mt-2 p-4 text-center">
-                        <h6 class="mb-0">{{ __('public.Your feedback help us to improve.') }}</h6> 
+                        <h6 class="mb-0">{{ __('public.Your feedback help us to improve.') }}</h6>
                         <small class="px-3">{{ __('public.Please let us know about your experience.') }}</small>
                         <div class="form" style="margin-top: 20px">
                             <div class="col-md-12">
-                                <input 
-                                    type="text" 
-                                    list="JobName" 
-                                    class="form-control" 
-                                    name="JobName" 
+                                <input
+                                    type="text"
+                                    list="JobName"
+                                    class="form-control"
+                                    name="JobName"
                                     style="border: 1px solid #ddd; width: 80%;display: inline;text-align: {{ $align }}"
                                     placeholder="{{ __('dashboard.Company') }}"
                                     required
-                                > 
+                                >
                                 <datalist id="JobName">
                                     @foreach ($jobs as $job)
                                         <option value="{{ $job->company_name }}">{{ str_replace('-', ' ', date('Y-F-d', strtotime($job['created_at']))) }}</option>
                                     @endforeach
                                 </datalist>
                             </div>
-                            <div class="d-flex flex-row justify-content-center mt-2"> 
-                                <img id="angry" src="{{ URL('storage/emojis/angry.png') }}" /> 
-                                <img id="sad" src="{{ URL('storage/emojis/sad.png') }}" /> 
-                                <img id="happy" src="{{ URL('storage/emojis/happy.png') }}" /> 
-                                <img id="smile" src="{{ URL('storage/emojis/smiling.png') }}" /> 
-                                <img id="lol" src="{{ URL('storage/emojis/lol.png') }}" /> 
+                            <div class="d-flex flex-row justify-content-center mt-2">
+                                <img id="angry" src="{{ URL('storage/emojis/angry.png') }}" />
+                                <img id="sad" src="{{ URL('storage/emojis/sad.png') }}" />
+                                <img id="happy" src="{{ URL('storage/emojis/happy.png') }}" />
+                                <img id="smile" src="{{ URL('storage/emojis/smiling.png') }}" />
+                                <img id="lol" src="{{ URL('storage/emojis/lol.png') }}" />
                             </div>
                             <input type="hidden" id="rate" name="rate" value="0" required>
-                            <div class="form-group mt-4"> 
-                                <textarea style="text-align: {{ $align }}" name="feedback" class="form-control" rows="4" required placeholder="{{ __('public.Feedbacks') }}"></textarea> 
+                            <div class="form-group mt-4">
+                                <textarea style="text-align: {{ $align }}" name="feedback" class="form-control" rows="4" required placeholder="{{ __('public.Feedbacks') }}"></textarea>
                             </div>
-                            <div class="mt-2"> 
+                            <div class="mt-2">
                                 <button type="submit" class="btn btn-primary btn-block">
                                     <span style="font-size: 13px;color: #fff"><b>{{ __('public.Create Feedback') }}</b></span>
-                                </button> 
+                                </button>
                             </div>
                         </div>
                     </div>
@@ -97,13 +97,13 @@
             {{-- <fieldset>
                 <div class="col-md-12">
                     <label for="JobName" class="labels" style="text-align: {{ $align }};display: block;color: #fff">{{ __('dashboard.Company') }}</label>
-                    <input 
-                        type="text" 
-                        list="JobName" 
-                        class="form-control" 
-                        name="JobName" 
+                    <input
+                        type="text"
+                        list="JobName"
+                        class="form-control"
+                        name="JobName"
                         style="border: 1px solid #ddd; width: 80%;display: inline;"
-                    > 
+                    >
                     <datalist id="JobName">
                         @foreach ($jobs as $job)
                             <option value="{{ $job->company_name }}">{{ str_replace('-', ' ', date('Y-F-d', strtotime($job['created_at']))) }}</option>
@@ -126,10 +126,10 @@
                         <input type="radio" id="5" name="rating" value="5" required />
                         <label for="5" aria-label="5 Stars">☆</label>
                     </div> --}}
-                    
+
                 {{--  </div>
             </fieldset>
-                  
+
             <input class="review__button" type="submit" value="Submit Review" /> --}}
         </form>
     </section>

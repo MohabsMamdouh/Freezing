@@ -6,7 +6,7 @@
 @section('content')
 <div class="container">
     <section class="is-title-bar">
-        <div 
+        <div
         @if (strtolower(language()->getCode()) == 'en')
             class="flex flex-col md:flex-row items-center justify-between space-y-6 md:space-y-0"
         @elseif (strtolower(language()->getCode()) == 'ar')
@@ -19,7 +19,7 @@
           </ul>
         </div>
     </section>
-      
+
     <section class="section main-section">
         <div class="grid gap-6 grid-cols-1 md:grid-cols-3 mb-6">
         <div class="card">
@@ -68,7 +68,7 @@
             </div>
         </div>
         </div>
-    
+
         {{-- <div class="card mb-6">
             <header class="card-header">
                 @if (strtolower(language()->getCode()) == 'en')
@@ -105,7 +105,7 @@
                 </div>
             </div>
         </div> --}}
-    
+
         <div class="notification blue">
             <div class="flex flex-col md:flex-row items-center justify-between space-y-3 md:space-y-0">
                 <div>
@@ -115,7 +115,7 @@
                 <button type="button" class="button small textual --jb-notification-dismiss">{{ __('public.Dismiss') }}</button>
             </div>
         </div>
-    
+
         <div class="card has-table">
             <header class="card-header">
                 @if (strtolower(language()->getCode()) == 'en')
@@ -123,11 +123,11 @@
                         <span class="icon"><i class="mdi mdi-account-multiple"></i></span>
                         {{ __('public.Jobs') }}
                     </p>
-                    <a href="{{ route('dashboard') }}" class="card-header-icon">
+                    <a href="{{ route('AdminDashboard') }}" class="card-header-icon">
                         <span class="icon"><i class="mdi mdi-reload"></i></span>
                     </a>
                 @elseif (strtolower(language()->getCode()) == 'ar')
-                    <a href="{{ route('dashboard') }}" class="card-header-icon">
+                    <a href="{{ route('AdminDashboard') }}" class="card-header-icon">
                         <span class="icon"><i class="mdi mdi-reload"></i></span>
                     </a>
                     <p class="card-header-title" style="text-align: right;display: inline">
@@ -156,8 +156,8 @@
                         @foreach ($jobs as $job)
                             <tr style="cursor: pointer;">
                                 <td class="image-cell">
-                                    <div 
-                                        class="image" 
+                                    <div
+                                        class="image"
                                         style="border: 1px solid #000;border-radius: 100%;text-align: center;background: #eee;"
                                     >
                                         <i class="fa-solid fa-{{ strtolower(substr($job->company_name, 0, 1)) }}"></i>
@@ -170,28 +170,28 @@
                                 <td data-label="{{ __('dashboard.Description') }}">{{ $job->description }}</td>
                                 <td data-label="{{ __('dashboard.Status') }}">
                                     @if ($job->status == 0)
-                                        <label 
+                                        <label
                                             class="badge badge-info"
                                             style="background: #A461D8"
                                         >
                                             {{ __('public.New') }}
                                         </label>
                                     @elseif ($job->status == 1)
-                                        <label 
+                                        <label
                                             class="badge badge-warning"
                                             style="background: #FFC542"
                                         >
                                             {{ __('public.Current') }}
                                         </label>
                                     @elseif ($job->status == 2)
-                                        <label 
+                                        <label
                                             class="badge badge-success"
                                             style="background: #44CE42"
                                         >
                                             {{ __('public.Finished') }}
                                         </label>
                                     @elseif ($job->status == 3)
-                                        <label 
+                                        <label
                                             class="badge badge-danger"
                                             style="background: #FC5A5A"
                                         >
@@ -205,7 +205,7 @@
                                 </td>
                                 <td data-label="{{ __('dashboard.Updated_at') }}">
                                     {{ str_replace('-', ' ', date('Y-F-d', strtotime($job->updated_at))) }}
-                                    {{ date("H:i", strtotime($job->updated_at)) }}    
+                                    {{ date("H:i", strtotime($job->updated_at)) }}
                                 </td>
                                 <td data-label="{{ __('dashboard.AssignTo') }}">
                                     @if ($job->status != 0)

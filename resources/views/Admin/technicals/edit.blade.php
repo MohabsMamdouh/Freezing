@@ -25,7 +25,7 @@
     <br>
     @foreach ($tech as $member)
         <section class="is-title-bar">
-            <div 
+            <div
             @if (strtolower(language()->getCode()) == 'en')
                 class="flex flex-col md:flex-row items-center justify-between space-y-6 md:space-y-0"
             @elseif (strtolower(language()->getCode()) == 'ar')
@@ -43,19 +43,19 @@
                                 {{ __('public.Edit Data') }}
                             @endif
                         </h4>
-                    </div>    
+                    </div>
                 </li>
             </ul>
             </div>
         </section>
-    
+
         <div class="container rounded bg-white mt-5 mb-5">
             <div class="row">
                 <div class="col-md-5 border-right">
                     <div class="d-flex flex-column align-items-center text-center p-3 py-5">
-                        <img 
-                            class="rounded-circle mt-3" 
-                            style="width: 200px;height: 200px" 
+                        <img
+                            class="rounded-circle mt-3"
+                            style="width: 200px;height: 200px"
                             src="{{ URL('storage/users/'.$member->image_path) }}"
                         >
                         <span class="font-weight-bold">{{ $member->name }}</span>

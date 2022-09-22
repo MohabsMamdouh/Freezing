@@ -13,7 +13,7 @@ class HomeController extends BaseController
      *
      * @return \Illuminate\Contracts\Support\Renderable
      */
-    public function index()
+    public function AdminHome()
     {
         $count_tech = count(User::all());
         $count_job = count(Job::all());
@@ -23,6 +23,11 @@ class HomeController extends BaseController
         $users = User::whereHas('roles', function($q){
             $q->where('name', 'Admin');
         })->get();
-        return view('home', compact('count_tech', 'count_job', 'growth'));
+        return view('Admin.home', compact('count_tech', 'count_job', 'growth'));
+    }
+
+    public function TechnicalHome()
+    {
+        return view('Technical.home');
     }
 }

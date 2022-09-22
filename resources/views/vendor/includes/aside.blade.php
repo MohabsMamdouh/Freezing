@@ -1,6 +1,6 @@
 <div class="aside-tools"
 @if (strtolower(language()->getCode()) == 'ar')
-style="text-align: right;display: grid;"
+    style="text-align: right;display: grid;"
 @endif
 >
     <div>
@@ -9,7 +9,7 @@ style="text-align: right;display: grid;"
                 {{ $titleEn }}
             @elseif (strtolower(language()->getCode()) == 'ar')
                 {{ $titleAr }}
-            @endif    
+            @endif
         </b>
     </div>
 </div>
@@ -17,11 +17,11 @@ style="text-align: right;display: grid;"
     <p class="menu-label">{{ __('public.General') }}</p>
     <ul class="menu-list">
         <li
-        @if (Route::currentRouteName() == 'dashboard')
+        @if (Route::currentRouteName() == 'TechnicalDashboard')
             class="active"
         @endif
         >
-            <a href="{{ route('dashboard') }}">
+            <a href="{{ route('TechnicalDashboard') }}">
                 <span class="icon"><i class="mdi mdi-desktop-mac"></i></span>
                 <span class="menu-item-label"
                 @if (strtolower(language()->getCode()) == 'ar')
@@ -179,7 +179,7 @@ style="text-align: right;display: grid;"
                         </a>
                     </li>
                 @endforeach
-                
+
             </ul>
         </li>
     </ul>

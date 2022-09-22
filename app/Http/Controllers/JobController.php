@@ -20,7 +20,7 @@ class JobController extends BaseController
     {
         $jobs = Job::with('getPhones', 'getAddress', 'getTechnical', 'Feedbacks')->where('status', $status)->get()->sortBy('created_at')->toArray();
         $techs = User::with('roles')->get();
-        return view('jobs.job', compact('status', 'jobs', 'techs'));
+        return view('Admin.jobs.job', compact('status', 'jobs', 'techs'));
     }
 
     /**
@@ -172,7 +172,7 @@ class JobController extends BaseController
             $phone->phone = $request['Phone2'];
             $phone->save();
         }
-        
+
         if (isset($request['addPhone']) && $request['addPhone'] != "") {
             $phone = new Phones_Job();
             $phone->phone = $request['addPhone'];

@@ -89,7 +89,7 @@ class JobController extends BaseController
         $techs = User::with('roles')->get();
 
         // dd($jobs);
-        return view('jobs.show', compact('jobs', 'techs'));
+        return view('Admin.jobs.show', compact('jobs', 'techs'));
     }
 
     /**

@@ -22,51 +22,51 @@
 
     <section class="section main-section">
         <div class="grid gap-6 grid-cols-1 md:grid-cols-3 mb-6">
-        <div class="card">
-            <div class="card-content">
+            <div class="card">
+                <div class="card-content">
+                    <div class="flex items-center justify-between">
+                        <div class="widget-label">
+                            <h3>
+                                {{ __('public.Technicals') }}
+                            </h3>
+                            <h1>
+                                {{ $count_tech }}
+                            </h1>
+                        </div>
+                        <span class="icon widget-icon text-green-500"><i class="mdi mdi-account-multiple mdi-48px"></i></span>
+                    </div>
+                </div>
+            </div>
+            <div class="card">
+                <div class="card-content">
+                    <div class="flex items-center justify-between">
+                        <div class="widget-label">
+                            <h3>
+                                {{ __('public.Jobs') }}
+                            </h3>
+                            <h1>
+                                {{ $count_job }}
+                            </h1>
+                        </div>
+                        <span class="icon widget-icon text-blue-500"><i class="mdi mdi-cart-outline mdi-48px"></i></span>
+                    </div>
+                </div>
+            </div>
+            <div class="card">
+                <div class="card-content">
                 <div class="flex items-center justify-between">
                     <div class="widget-label">
-                        <h3>
-                            {{ __('public.Technicals') }}
-                        </h3>
-                        <h1>
-                            {{ $count_tech }}
-                        </h1>
+                    <h3>
+                        {{ __('public.Growth Ration') }}
+                    </h3>
+                    <h1>
+                        {{ $growth }}%
+                    </h1>
                     </div>
-                    <span class="icon widget-icon text-green-500"><i class="mdi mdi-account-multiple mdi-48px"></i></span>
+                    <span class="icon widget-icon text-red-500"><i class="mdi mdi-finance mdi-48px"></i></span>
+                </div>
                 </div>
             </div>
-        </div>
-        <div class="card">
-            <div class="card-content">
-                <div class="flex items-center justify-between">
-                    <div class="widget-label">
-                        <h3>
-                            {{ __('public.Jobs') }}
-                        </h3>
-                        <h1>
-                            {{ $count_job }}
-                        </h1>
-                    </div>
-                    <span class="icon widget-icon text-blue-500"><i class="mdi mdi-cart-outline mdi-48px"></i></span>
-                </div>
-            </div>
-        </div>
-        <div class="card">
-            <div class="card-content">
-            <div class="flex items-center justify-between">
-                <div class="widget-label">
-                <h3>
-                    {{ __('public.Growth Ration') }}
-                </h3>
-                <h1>
-                    {{ $growth }}%
-                </h1>
-                </div>
-                <span class="icon widget-icon text-red-500"><i class="mdi mdi-finance mdi-48px"></i></span>
-            </div>
-            </div>
-        </div>
         </div>
 
         {{-- <div class="card mb-6">

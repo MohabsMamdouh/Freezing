@@ -17,10 +17,14 @@ return [
     'Language'   => 'Language',
     'Title'     => 'Al-Handasya',
     'My Profile' => 'My Profile',
+    'Edit Profile' => 'Edit Profile',
     'Settings' => 'Settings',
     'General' => 'General',
     'Perspective' => 'Perspective',
     'Feedbacks' => 'Feedbacks',
+    'Show Feedbacks' => 'Show Feedbacks',
+    'Show My Feedbacks' => 'Show My Feedbacks',
+    'Create Feedbacks' => 'Create Feedbacks',
     'Technicals' => 'Technicals',
     'Jobs' => 'Jobs',
     'Progress' => 'In Progress',
@@ -98,5 +102,6 @@ return [
     'Day' => 'Day',
     'Choose the plan that right for you' => 'Choose the plan that right for you',
     'Price' => 'Price',
+    'Info' => 'Info',
 
 ];

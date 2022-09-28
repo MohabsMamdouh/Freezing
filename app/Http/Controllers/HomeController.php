@@ -20,14 +20,11 @@ class HomeController extends BaseController
         $jobs_this_month = count(Job::whereMonth('created_at', date("m",strtotime('this month')))->get());
         $jobs_last = count(Job::all());
         $growth = round((($jobs_this_month / $jobs_last) * 100), 2);
-        $users = User::whereHas('roles', function($q){
-            $q->where('name', 'Admin');
-        })->get();
-        return view('Admin.home', compact('count_tech', 'count_job', 'growth'));
+        return view('home', compact('count_tech', 'count_job', 'growth'));
     }
 
     public function TechnicalHome()
     {
-        return view('Technical.home');
+        return view('home');
     }
 }

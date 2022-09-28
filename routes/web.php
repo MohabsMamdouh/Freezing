@@ -16,6 +16,11 @@ use Illuminate\Support\Facades\Auth;
 
 Route::group(['middleware' => 'language'], function () {
 
+    Route::controller(\App\Http\Controllers\Auth\LoginController::class)->group(function ()
+    {
+        Route::get('/home', 'authenticated')->name('authenticated');
+    });
+
     Route::controller(\App\Http\Controllers\UserhomeController::class)->group(function ()
     {
         Route::get('/', 'index')->name('UserHome');
@@ -27,7 +32,7 @@ Route::group(['middleware' => 'language'], function () {
     Route::controller(\App\Http\Controllers\Auth\ForgotPasswordController::class)->group(function ()
     {
         Route::get('forget-password', 'showForgetPasswordForm')->name('showForgetPasswordForm');
-        Route::post('send-email', 'submitForgetPasswordForm')->name('submitForgetPasswordForm'); 
+        Route::post('send-email', 'submitForgetPasswordForm')->name('submitForgetPasswordForm');
     });
 
     Route::controller(\App\Http\Controllers\MailerController::class)->group(function ()
@@ -36,11 +41,11 @@ Route::group(['middleware' => 'language'], function () {
     });
 
     Route::controller(\App\Http\Controllers\Auth\ResetPasswordController::class)->group(function ()
-    { 
+    {
         Route::get('reset-password/{token}', 'showResetPasswordForm')->name('showResetPasswordForm');
         Route::post('reset-password', 'sendPasswordResetNotification')->name('submitResetPasswordForm');
     });
-    
+
 });
 
 

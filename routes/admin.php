@@ -26,79 +26,83 @@ Route::group(['middleware' => 'language'], function () {
         });
 
         // Site Controller Pathes
-        Route::controller(\App\Http\Controllers\SiteController::class)->group(function () {
+        Route::prefix('settings')->controller(\App\Http\Controllers\SiteController::class)->group(function () {
             // Update Settings
-            Route::get('{id}/settings', 'edit')->name('settings');
-            Route::post('{id}/settings', 'update')->name('updateSetting');
+            Route::get('{id}', 'edit')->name('settings');
+            Route::post('{id}', 'update')->name('updateSetting');
         });
 
         // Feedbacks Pathes
-        Route::controller(\App\Http\Controllers\FeedbackController::class)->group(function () {
+        Route::prefix('feedback')->controller(\App\Http\Controllers\FeedbackController::class)->group(function () {
             // Show all Feedback
-            // Route::get('/feedback', 'index')->name('feedback');
+            Route::get('show', 'index')->name('ShowFeedback');
 
             // Create Feedback
-            Route::get('feedback/create', 'create')->name('CreateFeedback');
-            Route::post('feedback/store', 'store')->name('StoreFeedback');
+            Route::get('create', 'create')->name('CreateFeedback');
+            Route::post('store', 'store')->name('StoreFeedback');
         });
 
         // Technical Controller Pathes
-        Route::controller(\App\Http\Controllers\TechnicalController::class)->group(function () {
+        Route::prefix('technicals')->controller(\App\Http\Controllers\TechnicalController::class)->group(function () {
             // Show all User
-            Route::get('technicals', 'index')->name('technicals');
+            Route::get('/', 'index')->name('technicals');
 
             // Show Individual User
-            Route::get('{id}/technicals/show', 'show')->name('showTechnicals');
+            Route::get('{id}/show', 'show')->name('showTechnicals');
+
+            // Show Profile
+            Route::get('profile', 'profile')->name('MyProfile');
+            Route::get('edit', 'editProfile')->name('EditProfile');
 
             // Create Technical
-            Route::get('technicals/create', 'create')->name('createTechnicals');
-            Route::post('technicals/store', 'store')->name('storeTechnicals');
+            Route::get('create', 'create')->name('createTechnicals');
+            Route::post('store', 'store')->name('storeTechnicals');
 
             // Update Technical
-            Route::get('technicals/{id}/edit', 'edit')->name('EditTechnicals');
-            Route::post('technicals/update', 'update')->name('UpdateTechnicals');
+            Route::get('{id}/edit', 'edit')->name('EditTechnicals');
+            Route::post('update', 'update')->name('UpdateTechnicals');
 
             // Delete Technical
-            Route::get('technicals/{id}/delete', 'destroy')->name('DeleteTechnicals');
+            Route::get('{id}/delete', 'destroy')->name('DeleteTechnicals');
         });
 
         // Pricing Controller Pathes
-        Route::controller(\App\Http\Controllers\PriceController::class)->group(function () {
-            Route::get('price/{id}/plan', 'show')->name('ShowPlan');
-            Route::post('price/update', 'update')->name('UpdatePlan');
+        Route::prefix('price')->controller(\App\Http\Controllers\PriceController::class)->group(function () {
+            Route::get('{id}/plan', 'show')->name('ShowPlan');
+            Route::post('update', 'update')->name('UpdatePlan');
         });
 
 
         // Job Controller Pathes
-        Route::controller(\App\Http\Controllers\JobController::class)->group(function () {
+        Route::prefix('job')->controller(\App\Http\Controllers\JobController::class)->group(function () {
             // Show New Jobs
-            Route::get('job/{status}/new', 'index')->name('NewJob');
+            Route::get('{status}/new', 'index')->name('NewJob');
 
             // Show Current Jobs
-            Route::get('job/{status}/current', 'index')->name('CurrentJob');
+            Route::get('{status}/current', 'index')->name('CurrentJob');
 
             // Show Finish Jobs
-            Route::get('job/{status}/finish', 'index')->name('FinishJob');
+            Route::get('{status}/finish', 'index')->name('FinishJob');
 
             // Show Finish Jobs
-            Route::get('job/{status}/cancel', 'index')->name('CancelJob');
+            Route::get('{status}/cancel', 'index')->name('CancelJob');
 
             // Show Individual Job
-            Route::get('job/{id}/show', 'show')->name('ShowJob');
+            Route::get('{id}/show', 'show')->name('ShowJob');
 
             // Assign job To technical
-            Route::post('job/assignto', 'assignTo')->name('AssignTo');
+            Route::post('assignto', 'assignTo')->name('AssignTo');
 
             // Make Complete
-            Route::get('job/{id}/status-complete', 'updateStatus')->name('updateStatus');
+            Route::get('{id}/status-complete', 'updateStatus')->name('updateStatus');
 
             // Edit Job
-            Route::get('job/{id}/edit', 'edit')->name('EditJob');
-            Route::post('job/update', 'update')->name('UpdateJob');
+            Route::get('{id}/edit', 'edit')->name('EditJob');
+            Route::post('update', 'update')->name('UpdateJob');
 
             // Create Jobs
-            Route::get('job/create', 'create')->name('CreateJobs');
-            Route::post('job/store', 'store')->name('StoreJobs');
+            Route::get('create', 'create')->name('CreateJobs');
+            Route::post('store', 'store')->name('StoreJobs');
         });
     });
 

@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Models\feedback;
 use App\Models\Job;
+use App\Models\User;
+
 use Illuminate\Http\Request;
 
 class FeedbackController extends BaseController
@@ -15,7 +17,8 @@ class FeedbackController extends BaseController
      */
     public function index()
     {
-        return view('feedback.feedback');
+        $feedbacks = feedback::with('Jobs', 'getTechnical')->get();
+        return view('Admin.feedback.show', compact('feedbacks'));
     }
 
     /**
@@ -64,7 +67,8 @@ class FeedbackController extends BaseController
      */
     public function show($id)
     {
-        //
+        $feedbacks = feedback::with('Jobs', 'getTechnical')->get();
+        return view('Technical.Feedbacks.show', compact('feedbacks'));
     }
 
     /**

@@ -13,6 +13,9 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 
+use Illuminate\Support\Facades\Auth;
+
+
 class TechnicalController extends BaseController
 {
     /**
@@ -105,6 +108,16 @@ class TechnicalController extends BaseController
         return view('Admin.technicals.show', compact('tech'));
     }
 
+    public function profile()
+    {
+        return view('Profile.show');
+    }
+
+    public function editProfile()
+    {
+        return view('Profile.edit');
+    }
+
     /**
      * Show the form for editing the specified resource.
      *
@@ -174,10 +187,14 @@ class TechnicalController extends BaseController
         $phone->phone = $request['Phone1'];
         $phone->save();
 
-        if (isset($request['Phone2']) && $request['Phone2'] != "") {
-            $phone = Phone::where('id', $request['Hidden_Phone2'])->first();
-            $phone->phone = $request['Phone2'];
-            $phone->save();
+        if (isset($request['Hidden_Phone2'])) {
+            if($request['Phone2'] == null) {
+                Phone::where('id', $request['Hidden_Phone2'])->delete();
+            } else {
+                $phone = Phone::where('id', $request['Hidden_Phone2'])->first();
+                $phone->phone = $request['Phone2'];
+                $phone->save();
+            }
         }
 
         if (isset($request['addPhone'])) {
@@ -191,7 +208,16 @@ class TechnicalController extends BaseController
         $address->address = $request['Address'];
         $address->save();
 
-        return redirect(route('showTechnicals', ['id' => $request['id']]));
+
+        if (Auth::user()->checkrole('Admin') && Auth::user()->id == $request['id']) {
+            return redirect(route('MyProfile'));
+        }
+
+        if (Auth::user()->checkrole('Admin')) {
+            return redirect(route('showTechnicals', ['id' => $request['id']]));
+        }
+
+        return redirect(route('Technical.MyProfile'));
     }
 
     /**

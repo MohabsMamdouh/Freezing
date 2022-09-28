@@ -7,6 +7,8 @@ use App\Models\SiteInfo;
 use Carbon\Carbon;
 use DateTime;
 use Illuminate\Support\Facades\View;
+use Illuminate\Support\Facades\Auth;
+
 use Illuminate\Http\Request;
 
 class BaseController extends Controller
@@ -22,6 +24,13 @@ class BaseController extends Controller
         $this->middleware('auth');
     }
 
+    /**
+     * It takes a date and time and returns a string like "2 hours ago" or "3 days ago" or "just now"
+     *
+     * @param datetime The datetime string you want to convert.
+     * @param full If true, the full string will be returned. If false, it will only return the first
+     * time unit.
+     */
     public static function time_elapsed_string($datetime, $full = false) {
         $now = new DateTime();
         $ago = new DateTime($datetime);

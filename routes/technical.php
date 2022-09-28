@@ -27,28 +27,46 @@ Route::group(['middleware' => 'language'], function () {
 
 
         // Feedbacks Pathes
-        Route::controller(\App\Http\Controllers\FeedbackController::class)->group(function ()
+        Route::prefix('feedback')->name('Feedback.')->controller(\App\Http\Controllers\FeedbackController::class)->group(function ()
         {
-
-        });
-
-        // Technical Controller Pathes
-        Route::controller(\App\Http\Controllers\TechnicalController::class)->group(function ()
-        {
-
+            Route::get('{id}/show', 'show')->name('Show');
         });
 
         // Pricing Controller Pathes
         Route::controller(\App\Http\Controllers\PriceController::class)->group(function ()
         {
 
+
+        });
+
+        // Technical Controller Pathes
+        Route::prefix('technicals')->name('Technical.')->controller(\App\Http\Controllers\TechnicalController::class)->group(function ()
+        {
+            // Show Profile
+            Route::get('profile', 'profile')->name('MyProfile');
+            Route::get('edit', 'editProfile')->name('EditProfile');
+            Route::post('update', 'update')->name('Update');
         });
 
 
         // Job Controller Pathes
-        Route::controller(\App\Http\Controllers\JobController::class)->group(function ()
+        Route::prefix('job')->name('Job.')->controller(\App\Http\Controllers\JobController::class)->group(function ()
         {
+            // Show Current Jobs
+            Route::get('{status}/current', 'myJob')->name('Current');
 
+            // Show Finish Jobs
+            Route::get('{status}/finish', 'myJob')->name('Finish');
+
+            // Make Complete
+            Route::get('{id}/status-complete', 'updateStatus')->name('updateStatus');
+
+            // Show Individual Job
+            Route::get('{id}/show', 'show')->name('Show');
+
+            // Edit Job
+            Route::get('{id}/edit', 'edit')->name('Edit');
+            Route::post('update', 'update')->name('Update');
         });
     });
 

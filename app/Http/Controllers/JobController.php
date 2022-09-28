@@ -8,6 +8,7 @@ use App\Models\Phones_Job;
 use App\Models\Timing;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class JobController extends BaseController
 {
@@ -20,7 +21,16 @@ class JobController extends BaseController
     {
         $jobs = Job::with('getPhones', 'getAddress', 'getTechnical', 'Feedbacks')->where('status', $status)->get()->sortBy('created_at')->toArray();
         $techs = User::with('roles')->get();
-        return view('Admin.jobs.job', compact('status', 'jobs', 'techs'));
+        return view('Jobs.job', compact('status', 'jobs', 'techs'));
+    }
+
+    public function myJob($status)
+    {
+        $jobs = Job::whereHas('getTechnical', fn($query) => $query->where('id', Auth::user()->id))
+                ->with('getPhones', 'getAddress', 'getTechnical', 'Feedbacks')
+                ->where('status', $status)
+                ->get()->sortBy('created_at')->toArray();
+        return view('Jobs.job', compact('status', 'jobs'));
     }
 
     /**
@@ -30,7 +40,7 @@ class JobController extends BaseController
      */
     public function create()
     {
-        return view('jobs.create');
+        return view('Admin.jobs.create');
     }
 
     /**
@@ -88,8 +98,12 @@ class JobController extends BaseController
         $jobs = Job::with('getPhones', 'getAddress', 'getTechnical', 'Feedbacks')->where('id', $id)->first();
         $techs = User::with('roles')->get();
 
+        if (!Auth::user()->checkRole('Admin') && $jobs['getTechnical'][0]['id'] != Auth::user()->id) {
+            return redirect(route('TechnicalDashboard'));
+        }
+
         // dd($jobs);
-        return view('Admin.jobs.show', compact('jobs', 'techs'));
+        return view('Jobs.show', compact('jobs', 'techs'));
     }
 
     /**
@@ -102,7 +116,7 @@ class JobController extends BaseController
     {
         $job = Job::with('getPhones', 'getAddress', 'getTechnical')->where('id', $id)->get();
         $techs = User::with('roles')->get();
-        return view('jobs.edit', compact('job', 'techs'));
+        return view('Jobs.edit', compact('job', 'techs'));
     }
 
     public function assignTo(Request $request)
@@ -125,7 +139,11 @@ class JobController extends BaseController
         $job = Job::where('id', $id)->first();
         $job->status = 2;
         $job->save();
-        return redirect(route('ShowJob', ['id' => $id]));
+
+        if (Auth::user()->checkRole('Admin')) {
+            return redirect(route('ShowJob', ['id' => $id]));
+        }
+        return redirect(route('Job.Show', ['id' => $id]));
     }
 
     /**
@@ -185,8 +203,10 @@ class JobController extends BaseController
             $address->save();
         }
 
-
-        return redirect(route('ShowJob', ['id' => $request['id']]));
+        if (Auth::user()->checkRole('Admin')) {
+            return redirect(route('ShowJob', ['id' => $request['id']]));
+        }
+        return redirect(route('Job.Show', ['id' => $request['id']]));
     }
 
     /**
@@ -199,5 +219,11 @@ class JobController extends BaseController
     {
         $jobs = Job::with('getTechnical')->orderBy('id', 'asc')->take(10)->get();
         return $jobs;
+    }
+
+    public static function MYlatest($id)
+    {
+        $jobUser = User::with('getJobs')->where('id', $id)->get();
+        return $jobUser[0]->getJobs;
     }
 }

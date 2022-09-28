@@ -7,13 +7,13 @@
     @endphp
 @endif
 
-@if (Route::currentRouteName() == 'CurrentJob')
+@if (Route::currentRouteName() == 'CurrentJob' || Route::currentRouteName() == 'Job.Current')
     @php
         $title = __('public.Current Jobs')
     @endphp
 @endif
 
-@if (Route::currentRouteName() == 'FinishJob')
+@if (Route::currentRouteName() == 'FinishJob' || Route::currentRouteName() == 'Job.Finish')
     @php
         $title = __('public.Finished Jobs')
     @endphp
@@ -64,11 +64,11 @@
                     {{ __('public.New Jobs') }}
                 @endif
 
-                @if (Route::currentRouteName() == 'CurrentJob')
+                @if (Route::currentRouteName() == 'CurrentJob' || Route::currentRouteName() == 'Job.Current')
                     {{ __('public.Current Jobs') }}
                 @endif
 
-                @if (Route::currentRouteName() == 'FinishJob')
+                @if (Route::currentRouteName() == 'FinishJob' || Route::currentRouteName() == 'Job.Finish')
                     {{ __('public.Finished Jobs') }}
                 @endif
 
@@ -80,12 +80,14 @@
         </div>
     </section>
 
-    <section class="container mx-auto" style="width: 90%">
-        <a href="{{ route('CreateJobs') }}" class="btn btn-success">
-            <i class="fa-regular fa-square-plus" style="margin-right: 5px"></i>
-            {{ __('public.Create Job') }}
-        </a>
-    </section>
+    @if (Auth::user()->checkRole('Admin'))
+        <section class="container mx-auto" style="width: 90%">
+            <a href="{{ route('CreateJobs') }}" class="btn btn-success">
+                <i class="fa-regular fa-square-plus" style="margin-right: 5px"></i>
+                {{ __('public.Create Job') }}
+            </a>
+        </section>
+    @endif
 
     <section class="container mx-auto" style="width: 90%">
       <div class="container">
@@ -131,12 +133,12 @@
                                                 <span class="userimage" style="border: 1px solid #000;border-radius: 100%;text-align: center;background: #eee;">
                                                     <i class="fa-solid fa-{{ strtolower(substr($job['company_name'], 0, 1)) }}"></i>
                                                 </span>
-                                                <a class="username" href="{{ route('ShowJob', ['id' => $job['id']]) }}">
+                                                <a class="username" href="{{ Auth::user()->checkRole('Admin') ? route('ShowJob', ['id' => $job['id']]) : route('Job.Show', ['id' => $job['id']]) }}">
                                                     {{ $job['company_name'] }}
                                                     <small></small>
                                                 </a>
                                                 @if ($job['status'] == 1)
-                                                    <a href="{{ route('updateStatus',['id' => $job['id']]) }}" class="pull-right text-success content-link" style="
+                                                    <a href="{{ Auth::user()->checkRole('Admin') ? route('updateStatus' ,['id' => $job['id']]) : route('Job.updateStatus' ,['id' => $job['id']]) }}" class="pull-right text-success content-link" style="
                                                         background: #080;
                                                         margin-left: 15px;
                                                         border: 1px solid #ddd;
@@ -147,7 +149,7 @@
                                                         <i class="fa-solid fa-check"></i>
                                                     </a>
                                                 @endif
-                                                <a href="{{ route('EditJob', ['id' => $job['id']]) }}" class="pull-right text-success content-link">
+                                                <a href="{{ Auth::user()->checkRole('Admin') ? route('EditJob' ,['id' => $job['id']]) : route('Job.Edit' ,['id' => $job['id']]) }}" class="pull-right text-success content-link">
                                                     <i class="fa-solid fa-pen-to-square"></i>
                                                 </a>
 
@@ -259,8 +261,7 @@
                                                         </div>
                                                         <div style="padding: 5px;">
                                                             @if ($job['status'] == 1 || $job['status'] == 2)
-                                                                {{ str_replace('-', ' ', date('Y-F-d', strtotime($job['updated_at']))) }}
-                                                                {{ date("H:i", strtotime($job['updated_at'])) }}
+                                                                {{ App\Http\Controllers\FeedbackController::time_elapsed_string($job['updated_at']) }}
                                                             @endif
                                                         </div>
                                                     </div>
@@ -411,9 +412,11 @@
                                                                     </div>
                                                                     <div style="width: 80%; float:right;border: 1px solid #ddd;padding: 10px;">
                                                                         <span>
-                                                                            @for ($i = 0; $i <= $feed['rate']; $i++)
-                                                                                *
-                                                                            @endfor
+                                                                            <a class="u-link-v5 g-color-gray-dark-v4 g-color-primary--hover" href="#!">
+                                                                                @for ($i = 0; $i <= $feed['rate']; $i++)
+                                                                                    <i class="fa-solid fa-star"></i>
+                                                                                @endfor
+                                                                            </a>
                                                                             ({{ $feed['rate']+1 }})
                                                                         </span><br>
                                                                         <span>{{ $feed['feedback'] }}</span>

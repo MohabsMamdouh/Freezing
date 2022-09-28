@@ -97,7 +97,7 @@
                                 @else
                                     <div class="col-md-12">
                                         <label class="labels" style="text-align: {{ $align }};display: block;">{{ __('auth.Phone') }}</label>
-                                        <input type="text" class="form-control" name="Phone2" placeholder="{{ __('auth.Phone') }}" value="">
+                                        <input type="text" class="form-control" name="addPhone" placeholder="{{ __('auth.Phone') }}" value="">
                                     </div>
                                 @endif
                                 <div class="col-md-12">

@@ -14,97 +14,65 @@
         @endif
         >
           <ul>
-            <li>{{ __('dashboard.Admin') }}</li>
+            <li>
+                {{ Auth::user()->checkRole('Admin') ? __('dashboard.Admin') : __('dashboard.Technical') }}
+            </li>
             <li>{{ __('dashboard.Dashboard') }}</li>
           </ul>
         </div>
     </section>
 
     <section class="section main-section">
-        <div class="grid gap-6 grid-cols-1 md:grid-cols-3 mb-6">
-            <div class="card">
-                <div class="card-content">
+        @if (Auth::user()->checkRole('Admin'))
+            <div class="grid gap-6 grid-cols-1 md:grid-cols-3 mb-6">
+                <div class="card">
+                    <div class="card-content">
+                        <div class="flex items-center justify-between">
+                            <div class="widget-label">
+                                <h3>
+                                    {{ __('public.Technicals') }}
+                                </h3>
+                                <h1>
+                                    {{ $count_tech }}
+                                </h1>
+                            </div>
+                            <span class="icon widget-icon text-green-500"><i class="mdi mdi-account-multiple mdi-48px"></i></span>
+                        </div>
+                    </div>
+                </div>
+                <div class="card">
+                    <div class="card-content">
+                        <div class="flex items-center justify-between">
+                            <div class="widget-label">
+                                <h3>
+                                    {{ __('public.Jobs') }}
+                                </h3>
+                                <h1>
+                                    {{ $count_job }}
+                                </h1>
+                            </div>
+                            <span class="icon widget-icon text-blue-500"><i class="mdi mdi-cart-outline mdi-48px"></i></span>
+                        </div>
+                    </div>
+                </div>
+                <div class="card">
+                    <div class="card-content">
                     <div class="flex items-center justify-between">
                         <div class="widget-label">
-                            <h3>
-                                {{ __('public.Technicals') }}
-                            </h3>
-                            <h1>
-                                {{ $count_tech }}
-                            </h1>
+                        <h3>
+                            {{ __('public.Growth Ration') }}
+                        </h3>
+                        <h1>
+                            {{ $growth }}%
+                        </h1>
                         </div>
-                        <span class="icon widget-icon text-green-500"><i class="mdi mdi-account-multiple mdi-48px"></i></span>
+                        <span class="icon widget-icon text-red-500"><i class="mdi mdi-finance mdi-48px"></i></span>
+                    </div>
                     </div>
                 </div>
             </div>
-            <div class="card">
-                <div class="card-content">
-                    <div class="flex items-center justify-between">
-                        <div class="widget-label">
-                            <h3>
-                                {{ __('public.Jobs') }}
-                            </h3>
-                            <h1>
-                                {{ $count_job }}
-                            </h1>
-                        </div>
-                        <span class="icon widget-icon text-blue-500"><i class="mdi mdi-cart-outline mdi-48px"></i></span>
-                    </div>
-                </div>
-            </div>
-            <div class="card">
-                <div class="card-content">
-                <div class="flex items-center justify-between">
-                    <div class="widget-label">
-                    <h3>
-                        {{ __('public.Growth Ration') }}
-                    </h3>
-                    <h1>
-                        {{ $growth }}%
-                    </h1>
-                    </div>
-                    <span class="icon widget-icon text-red-500"><i class="mdi mdi-finance mdi-48px"></i></span>
-                </div>
-                </div>
-            </div>
-        </div>
+        @endif
 
-        {{-- <div class="card mb-6">
-            <header class="card-header">
-                @if (strtolower(language()->getCode()) == 'en')
-                    <p class="card-header-title">
-                        <span class="icon"><i class="mdi mdi-finance"></i></span>
-                        {{ __('dashboard.Performance') }}
-                    </p>
-                    <a href="#" class="card-header-icon">
-                        <span class="icon"><i class="mdi mdi-reload"></i></span>
-                    </a>
-                @elseif (strtolower(language()->getCode()) == 'ar')
-                    <a href="#" class="card-header-icon">
-                        <span class="icon"><i class="mdi mdi-reload"></i></span>
-                    </a>
-                    <p class="card-header-title" style="text-align: right;display: inline">
-                        {{ __('dashboard.Performance') }}
-                        <span class="icon"><i class="mdi mdi-finance"></i></span>
-                    </p>
-                @endif
-            </header>
-            <div class="card-content">
-                <div class="chart-area">
-                    <div class="h-full">
-                        <div class="chartjs-size-monitor">
-                            <div class="chartjs-size-monitor-expand">
-                                <div></div>
-                            </div>
-                            <div class="chartjs-size-monitor-shrink">
-                                <div></div>
-                            </div>
-                        </div>
-                        <canvas id="big-line-chart" width="2992" height="1000" class="chartjs-render-monitor block" style="height: 400px; width: 1197px;"></canvas>
-                    </div>
-                </div>
-            </div>
-        </div> --}}
 
         <div class="notification blue">
             <div class="flex flex-col md:flex-row items-center justify-between space-y-3 md:space-y-0">
@@ -121,17 +89,17 @@
                 @if (strtolower(language()->getCode()) == 'en')
                     <p class="card-header-title">
                         <span class="icon"><i class="mdi mdi-account-multiple"></i></span>
-                        {{ __('public.Jobs') }}
+                        {{ Auth::user()->checkRole('Admin') ? __('public.Jobs') : __('public.Current Jobs') }}
                     </p>
-                    <a href="{{ route('AdminDashboard') }}" class="card-header-icon">
+                    <a href="{{ Auth::user()->checkRole('Admin') ? route('AdminDashboard') : route('TechnicalDashboard') }}" class="card-header-icon">
                         <span class="icon"><i class="mdi mdi-reload"></i></span>
                     </a>
                 @elseif (strtolower(language()->getCode()) == 'ar')
-                    <a href="{{ route('AdminDashboard') }}" class="card-header-icon">
+                    <a href="{{ Auth::user()->checkRole('Admin') ? route('AdminDashboard') : route('TechnicalDashboard') }}" class="card-header-icon">
                         <span class="icon"><i class="mdi mdi-reload"></i></span>
                     </a>
                     <p class="card-header-title" style="text-align: right;display: inline">
-                        {{ __('public.Jobs') }}
+                        {{ Auth::user()->checkRole('Admin') ? __('public.Jobs') : __('public.Current Jobs') }}
                         <span class="icon"><i class="mdi mdi-account-multiple"></i></span>
                     </p>
                 @endif
@@ -150,9 +118,16 @@
                         </tr>
                     </thead>
                     <tbody>
-                        @php
-                            $jobs = \App\Http\Controllers\JobController::latest();
-                        @endphp
+                        @if (Auth::user()->checkRole('Admin'))
+                            @php
+                                $jobs = \App\Http\Controllers\JobController::latest();
+                            @endphp
+                        @endif
+                        @if (Auth::user()->checkRole('Technical'))
+                            @php
+                                $jobs = \App\Http\Controllers\JobController::MYlatest(Auth::user()->id);
+                            @endphp
+                        @endif
                         @foreach ($jobs as $job)
                             <tr style="cursor: pointer;">
                                 <td class="image-cell">
@@ -164,7 +139,9 @@
                                     </div>
                                 </td>
                                 <td data-label="{{ __('dashboard.Company') }}">
-                                    <a href="{{ route('ShowJob', ['id' => $job->id]) }}">{{ $job->company_name }}</a>
+                                    <a href="{{ Auth::user()->checkRole('Admin') ? route('ShowJob', ['id' => $job->id]) : route('Job.Show', ['id' => $job->id]) }}">
+                                        {{ $job->company_name }}
+                                    </a>
                                 </td>
                                 <td data-label="{{ __('dashboard.Email') }}">{{ $job->email }}</td>
                                 <td data-label="{{ __('dashboard.Description') }}">{{ $job->description }}</td>
@@ -200,12 +177,10 @@
                                     @endif
                                 </td>
                                 <td data-label="{{ __('dashboard.Created_at') }}">
-                                    {{ str_replace('-', ' ', date('Y-F-d', strtotime($job->created_at))) }}
-                                    {{ date("H:i", strtotime($job->created_at)) }}
+                                    {{ App\Http\Controllers\FeedbackController::time_elapsed_string($job->created_at) }}
                                 </td>
                                 <td data-label="{{ __('dashboard.Updated_at') }}">
-                                    {{ str_replace('-', ' ', date('Y-F-d', strtotime($job->updated_at))) }}
-                                    {{ date("H:i", strtotime($job->updated_at)) }}
+                                    {{ App\Http\Controllers\FeedbackController::time_elapsed_string($job->updated_at) }}
                                 </td>
                                 <td data-label="{{ __('dashboard.AssignTo') }}">
                                     @if ($job->status != 0)
@@ -216,7 +191,7 @@
                                 </td>
                                 <td class="actions-cell">
                                     <div class="buttons right nowrap">
-                                        <a href="{{ route('ShowJob', ['id' => $job->id]) }}" class="button small green --jb-modal"  data-target="sample-modal-2" type="button">
+                                        <a href="{{ Auth::user()->checkRole('Admin') ? route('ShowJob', ['id' => $job->id]) : route('Job.Show', ['id' => $job->id]) }}" class="button small green --jb-modal"  data-target="sample-modal-2" type="button">
                                             <span class="icon"><i class="mdi mdi-eye"></i></span>
                                         </a>
                                     </div>

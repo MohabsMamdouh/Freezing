@@ -196,8 +196,7 @@
                                     </div>
                                     <div style="padding: 5px;">
                                         @if ($jobs['status'] == 1 || $jobs['status'] == 2)
-                                            {{ str_replace('-', ' ', date('Y-F-d', strtotime($jobs['updated_at']))) }}
-                                            {{ date("H:i", strtotime($jobs['updated_at'])) }}
+                                            {{ App\Http\Controllers\FeedbackController::time_elapsed_string($jobs->updated_at) }}
                                         @endif
                                     </div>
                                 </div>

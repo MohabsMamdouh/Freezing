@@ -38,11 +38,11 @@
 
         {{-- My Profile --}}
         @if (strtolower(language()->getCode()) == 'en')
-          <a href="{{ route('showTechnicals', ['id'=> auth()->user()->id]) }}" class="navbar-item">
+          <a href="{{ Auth::user()->checkRole('Admin') ? route('MyProfile') : route('Technical.MyProfile') }}" class="navbar-item">
             <span class="icon"><i class="mdi mdi-account"></i></span>
             <span>{{ __('public.My Profile') }}</span>
         @elseif (strtolower(language()->getCode()) == 'ar')
-          <a href="{{ route('showTechnicals', ['id' => auth()->user()->id]) }}" style="display: inline-flex" class="navbar-item">
+          <a href="{{ Auth::user()->checkRole('Admin') ? route('MyProfile') : route('Technical.MyProfile') }}" style="display: inline-flex" class="navbar-item">
             <span>{{ __('public.My Profile') }}</span>
             <span class="icon right"><i class="mdi mdi-account"></i></span>
         @endif
@@ -73,12 +73,12 @@
     {{-- Language Switcher --}}
     <div class="navbar-item has-divider has-user-avatar">
       @if (strtolower(language()->getCode()) == 'en')
-        <a class="dropdown-item" href="{{ language()->back('ar') }}"> 
+        <a class="dropdown-item" href="{{ language()->back('ar') }}">
             <img style="display: inline" src="{{ asset('storage/flags/'. language()->country('ar') .'.png') }}" alt="{{ 'العربية' }}" width="{{ config('language.flags.width') }}" /> &nbsp;
             {{ 'العربية' }}
         </a>
       @elseif (strtolower(language()->getCode()) == 'ar')
-        <a class="dropdown-item" href="{{ language()->back('en') }}"> 
+        <a class="dropdown-item" href="{{ language()->back('en') }}">
             <img style="display: inline" src="{{ asset('storage/flags/'. language()->country('en') .'.png') }}" alt="{{ 'English' }}" width="{{ config('language.flags.width') }}" /> &nbsp;
             {{ 'English' }}
         </a>
